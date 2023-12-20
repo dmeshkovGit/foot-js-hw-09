@@ -30,7 +30,7 @@ feedbackForm.addEventListener("submit", (event) => {
     if (email.value !== "" && message.value !== "") {
     console.log(feedbackFormState);
     localStorage.removeItem("feedback-form-state")
-    feedbackForm.reset(); 
+        feedbackForm.reset(); 
     } else {
       alert("Fill in all fields !")
     }
