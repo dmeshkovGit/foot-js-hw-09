@@ -5,7 +5,16 @@ const feedbackFormState = {
     email: "",
     message: ""
 };
-const savedFeedbackFormState = JSON.parse(localStorage.getItem("feedback-form-state"));
+
+const getParsedItem = (item) => {
+    try {
+        return JSON.parse(item)
+    } catch (error) {
+        console.error('parsin error');
+    };
+};
+
+const savedFeedbackFormState = getParsedItem(localStorage.getItem("feedback-form-state"));
 
 if (savedFeedbackFormState !== null) {
 feedbackFormState.email = savedFeedbackFormState.email;
@@ -18,9 +27,9 @@ message.value = feedbackFormState.message;
     
 feedbackForm.addEventListener("input", (event) => {     
     if (event.target.name === "email") {
-        feedbackFormState.email = event.target.value;
+        feedbackFormState.email = event.target.value.trim();
     } else {
-        feedbackFormState.message = event.target.value;
+        feedbackFormState.message = event.target.value.trim();
     }
     localStorage.setItem("feedback-form-state", JSON.stringify(feedbackFormState));
 });
