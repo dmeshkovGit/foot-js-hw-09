@@ -1,31 +1,20 @@
 const feedbackForm = document.querySelector(".feedback-form");
 const email = feedbackForm.elements.email
 const message = feedbackForm.elements.message
-const feedbackFormState = {
-    email: "",
-    message: ""
-};
-
 const getParsedItem = (item) => {
     try {
         return JSON.parse(item)
     } catch (error) {
-        console.error('parsin error');
+        console.error('parsing error');
     };
 };
-
 const savedFeedbackFormState = getParsedItem(localStorage.getItem("feedback-form-state"));
+const feedbackFormState = savedFeedbackFormState || { email: "", message: "" };
 
-if (savedFeedbackFormState !== null) {
-feedbackFormState.email = savedFeedbackFormState.email;
-feedbackFormState.message = savedFeedbackFormState.message;
-}
 email.value = feedbackFormState.email;
 message.value = feedbackFormState.message;
-
-
-    
-feedbackForm.addEventListener("input", (event) => {     
+  
+feedbackForm.addEventListener("input", (event) => {    
     if (event.target.name === "email") {
         feedbackFormState.email = event.target.value.trim();
     } else {
@@ -36,7 +25,8 @@ feedbackForm.addEventListener("input", (event) => {
 
 feedbackForm.addEventListener("submit", (event) => {
     event.preventDefault()
-    if (email.value !== "" && message.value !== "") {
+    if (feedbackFormState.email !== "" && feedbackFormState.message !== "")
+    {
     console.log(feedbackFormState);
     localStorage.removeItem("feedback-form-state")
         feedbackForm.reset(); 
