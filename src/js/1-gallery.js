@@ -79,7 +79,7 @@ const gallery = document.querySelector(".gallery")
   </a>
 </li>`, "");
 
-simpleLightbox = new simpleLightbox(".gallery a", {
+new simpleLightbox(".gallery a", {
     captionsData: "alt",
     captionDelay: 250,
 })
