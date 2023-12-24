@@ -68,18 +68,17 @@ const images = [
 ];
 
 const gallery = document.querySelector(".gallery")
-  gallery.innerHTML = images.reduce((html, image) =>
-  html += `<li class="gallery-item">
-  <a class="gallery-link" href="${image.original}">
-    <img
-      class="gallery-image"
-      src="${image.preview}"
-      alt="${image.description}"
-    />
-  </a>
-</li>`, "");
+gallery.innerHTML = images.reduce((html, image) => {
+  return html + `<li class="gallery-item">
+    <a class="gallery-link" href="${image.original}">
+      <img class="gallery-image" src="${image.preview}" alt="${image.description}" />
+    </a>
+  </li>`;
+}, "");
 
-const lightBox = new simpleLightbox(".gallery a", {
+
+
+new simpleLightbox(".gallery a", {
     captionsData: "alt",
     captionDelay: 250,
 })

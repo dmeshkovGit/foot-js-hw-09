@@ -11,9 +11,11 @@ const getParsedItem = (item) => {
 const savedFeedbackFormState = getParsedItem(localStorage.getItem("feedback-form-state"));
 const feedbackFormState = savedFeedbackFormState || { email: "", message: "" };
 
+if (savedFeedbackFormState) {
 email.value = feedbackFormState.email;
-message.value = feedbackFormState.message;
-  
+message.value = feedbackFormState.message;   
+}
+ 
 feedbackForm.addEventListener("input", (event) => {    
     if (event.target.name === "email") {
         feedbackFormState.email = event.target.value.trim();
@@ -25,10 +27,10 @@ feedbackForm.addEventListener("input", (event) => {
 
 feedbackForm.addEventListener("submit", (event) => {
     event.preventDefault()
-    if (feedbackFormState.email !== "" && feedbackFormState.message !== "")
+    if (email.value !== "" && message.value !== "")
     {
     console.log(feedbackFormState);
-    localStorage.removeItem("feedback-form-state")
+        localStorage.removeItem("feedback-form-state");
         feedbackForm.reset(); 
     } else {
       alert("Fill in all fields !")
